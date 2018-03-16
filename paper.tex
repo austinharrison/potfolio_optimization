@@ -22,6 +22,20 @@
 \usepackage{graphicx} % support the \includegraphics command and options
 \graphicspath{ {images/} }
 
+\usepackage{pdfpages}
+\pdfminorversion=7
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+ 
+\urlstyle{same}
+
+
 % \usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
 
 %%% PACKAGES
@@ -81,7 +95,7 @@ Portfolio optimization; Cryptocurrency; Minimax; Finance;
 
 \section{Introduction}
 
-The authors seek stable investment returns that exceed that which they might find in a professionally managed fund. Supposing a light Efficient Market Hypothesis, the authors will implement a version of the Portfolio Optimization technique first proposed by Harry Markowitz in his\emph{ The Journal of Finance} article from March of 1952. At the time, Mr. Markowitz phrased his motivation, supposing that\emph{ ``...the investor does (or should) consider expected return a desirable thing and variance of return an undesirable thing”} (Markowitz, 1952).
+The authors seek stable investment returns that exceed that which they might find in a professionally managed fund. Supposing a light Efficient Market Hypothesis, the authors will implement a version of the Portfolio Optimization technique first proposed by Harry Markowitz in his\emph{ The Journal of Finance} article from March of 1952. At the time, Mr. Markowitz phrased his motivation, supposing that\emph{ ``...the investor does (or should) consider expected return a desirable thing and variance of return an undesirable thing”} \cite{markowitz}.
 
 ``Diversification” is a conventional response to a desire to reduce risk. Diversification is accomplished by selecting a variety of security types (stocks, bonds, real estate, etc.) from a variety of industries. Markowitz maintains that Diversification is not enough, writing \emph{``The returns from securities are too intercorrelated. Diversification cannot eliminate all variance.”} (Markowitz, 1952) We see this with general market downturns, where almost the entire market will collapse at the same time. Markowitz’s method looks to identify a more truly diverse combination of holdings, going beyond simplistic diversification.
 
@@ -200,6 +214,47 @@ Lastly, we would be interested in exploring the use of neural networks in our op
 
 In Summary, portfolio optimization can be used to minimize the risk when investing in volatile financial assets like cryptocurrencies. Building on the time-tested foundations developed by Markowitz and Sharpe, modern optimization techniques will create new and interesting methods of minimizing risk while maximizing gains.
 
+\begin{thebibliography}{1}
+
+\bibitem{copula} Copula (probability theory). (2018, February 23). In \emph{Wikipedia}. Retrieved from
+\url{ https://en.wikipedia.org/w/index.php?title=Copula_(probability_theory)&oldid=827164839}
+
+\bibitem{starke} Dr. Thomas Starke, David Edwards, \& Dr. Thomas Wiecki. (2015, March 9). The Efficient Frontier: Markowitz portfolio optimization in Python. Retrieved March 10, 2018, from \url{https://blog.quantopian.com/markowitz-portfolio-optimization-2/}
+
+\bibitem{freitas} Freitas, F. D., De Souza, A. F., \& de Almeida, A. R. (2009). Prediction-based portfolio optimization model using neural networks. \emph{Neurocomputing}, 72(10), 2155–2170. \url{https://doi.org/10.1016/j.neucom.2008.08.019}
+
+\bibitem{garcia} Garcia, D., \& Schweitzer, F. (2015). Social signals and algorithmic trading of Bitcoin. \emph{Royal Society Open Science}, 2(9). \url{https://doi.org/10.1098/rsos.150288}
+
+\bibitem{gregory} Gregory, C., Darby-Dowman, K., \& Mitra, G. (2011). Robust optimization and portfolio selection: The cost of robustness. \emph{European Journal of Operational Research}, 212(2), 417–428. \url{https://doi.org/10.1016/j.ejor.2011.02.015}
+
+\bibitem{hong} Hong, K. (2017). Bitcoin as an alternative investment vehicle. \emph{Information Technology and Management}, 18(4), 265–275. \url{https://doi.org/10.1007/s10799-016-0264-6}
+
+\bibitem{bradford} Investment Portfolio Optimization. (n.d.). Retrieved March 10, 2018, from \url{http://www.bradfordlynch.com/blog/2015/12/04/InvestmentPortfolioOptimization.html}
+
+\bibitem{liu} Liu, Q., Dang, C., \& Huang, T. (2013). A One-Layer Recurrent Neural Network for Real-Time Portfolio Optimization With Probability Criterion. \emph{IEEE Transactions on Cybernetics}, 43(1), 14–23. \url{https://doi.org/10.1109/TSMCB.2012.2198812}
+
+\bibitem{markowitz} Markowitz, H. (1952). Portfolio Selection. \emph{The Journal of Finance}, 7(1), 77–91. \url{https://doi.org/10.2307/2975974}
+
+\bibitem{peng} Peng, Y., Albuquerque, P. H. M., Camboim de Sá, J. M., Padula, A. J. A., \& Montenegro, M. R. (2018). The best of two worlds: Forecasting high frequency volatility for cryptocurrencies and traditional currencies with Support Vector Regression. \emph{Expert Systems with Applications}, 97, 177–192. \url{https://doi.org/10.1016/j.eswa.2017.12.004}
+
+\bibitem{polak} Polak, G. G., Rogers, D. F., \& Sweeney, D. J. (2010). Risk management strategies via minimax portfolio optimization.\emph{ European Journal of Operational Research}, 207(1), 409–419. \url{https://doi.org/10.1016/j.ejor.2010.04.025} 
+
+\bibitem{sharpe66} Sharpe, W. F. (1966). Mutual Fund Performance. \emph{The Journal of Business}, 39(1), 119–138.
+
+\bibitem{sharpe71} Sharpe, W. F. (1971). A Linear Programming Approximation for the General Portfolio Analysis Problem. \emph{Journal of Financial \& Quantitative Analysis}, 6(5), 1263–1275.
+
+\bibitem{xidonas} Xidonas, P., Mavrotas, G., Hassapis, C., \& Zopounidis, C. (2017). Robust multiobjective portfolio optimization: A minimax regret approach. \emph{European Journal of Operational Research}, 262(1), 299–305. \url{https://doi.org/10.1016/j.ejor.2017.03.041}
+
+\bibitem{young} Young, M. R. (1998). A Minimax Portfolio Selection Rule with Linear Programming Solution. Management Science, 44(5), 673–683. \url{https://doi.org/10.1287/mnsc.44.5.673}
+
+\bibitem{zhang04a} Zhang, Y., \& Hua, Y. (2004a). Portfolio Optimization for Multi-stage Capital Investment with Neural Networks. In F.-L. Yin, J. Wang, \& C. Guo (Eds.), Advances in Neural Networks - ISNN 2004 (Vol. 3174, pp. 982–987). Berlin, Heidelberg: Springer Berlin Heidelberg. \url{https://doi.org/10.1007/978-3-540-28648-6_156}
+
+\bibitem{zhang04b} Zhang, Y., \& Hua, Y. (2004b). Portfolio Optimization for Multi-stage Capital Investment with Neural Networks. In Advances in Neural Networks - ISNN 2004 (pp. 982–987). Springer, Berlin, Heidelberg. \url{https://doi.org/10.1007/978-3-540-28648-6_156}
+
+\bibitem{zhao} Zhao, Y., Stasinakis, C., Sermpinis, G., \& Shi, Y. (2018). Neural network copula portfolio optimization for exchange traded funds. Quantitative Finance, 0(0), 1–15. \url{https://doi.org/10.1080/14697688.2017.1414505}
+
+
+\end{thebibliography}
 
 \section*{Appendix}
 
@@ -212,6 +267,11 @@ In Summary, portfolio optimization can be used to minimize the risk when investi
 \includegraphics[width=\textwidth]{aspe3}
 \includegraphics[width=0.4\textwidth]{aspe4}
 
+\subsection*{Python - Cryptocurrencies}
+%\includepdf[pages=-,scale=.8,pagecommand={}]{crypto_notebook.pdf}
+
+\subsection*{Python - Stocks}
+%\includepdf[pages=-,scale=.8,pagecommand={}]{stocks_notebook.pdf}
 
 
 
