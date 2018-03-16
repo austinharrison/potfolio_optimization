@@ -22,6 +22,22 @@
 \usepackage{graphicx} % support the \includegraphics command and options
 \graphicspath{ {images/} }
 
+\usepackage{pdfpages}
+\pdfminorversion=7
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+ 
+\urlstyle{same}
+
+\usepackage{hanging}
+
+
 % \usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
 
 %%% PACKAGES
@@ -81,11 +97,11 @@ Portfolio optimization; Cryptocurrency; Minimax; Finance;
 
 \section{Introduction}
 
-The authors seek stable investment returns that exceed that which they might find in a professionally managed fund. Supposing a light Efficient Market Hypothesis, the authors will implement a version of the Portfolio Optimization technique first proposed by Harry Markowitz in his\emph{ The Journal of Finance} article from March of 1952. At the time, Mr. Markowitz phrased his motivation, supposing that\emph{ ``...the investor does (or should) consider expected return a desirable thing and variance of return an undesirable thing”} (Markowitz, 1952).
+The goal of the analysis was to seek stable investment returns that exceeded what could be found in a professionally managed fund. Supposing a light Efficient Market Hypothesis, we implemented a version of the Portfolio Optimization technique first proposed by Harry Markowitz in his\emph{ The Journal of Finance} article from March of 1952. At the time, Mr. Markowitz phrased his motivation, supposing that\emph{ ``...the investor does (or should) consider expected return a desirable thing and variance of return an undesirable thing”}. (Markowitz, 1952)
 
 ``Diversification” is a conventional response to a desire to reduce risk. Diversification is accomplished by selecting a variety of security types (stocks, bonds, real estate, etc.) from a variety of industries. Markowitz maintains that Diversification is not enough, writing \emph{``The returns from securities are too intercorrelated. Diversification cannot eliminate all variance.”} (Markowitz, 1952) We see this with general market downturns, where almost the entire market will collapse at the same time. Markowitz’s method looks to identify a more truly diverse combination of holdings, going beyond simplistic diversification.
 
-Our problem is a simple one:\emph{ How can we structure a securities portfolio that provides a reliable expected return over a long period of time?} We will examine this question in the context of the modern era, applying the technique to a selection of cryptocurrencies (BTC ETH DASH XRP LTC XLM REP XMR ETC MAID) and validating our models by applying them to a selection of stocks from the S\&P 500 Index. In both cases, we’ll be looking for a mix of elements that provides the least variance and the greatest expected return. 
+Our problem was a simple one:\emph{ How could structure a securities portfolio that provided a reliable expected return over a long period of time?} We examined this question in the context of the modern era by applying the technique to a selection of cryptocurrencies (BTC ETH DASH XRP LTC XLM REP XMR ETC MAID) and validating our models by applying them to a selection of stocks from the S\&P 500 Index. In both cases, we were looking for a mix of elements that provided the least variance and the greatest expected return. 
 
 \section{Literature Review}
 
@@ -112,7 +128,7 @@ In addition to Markowitz inspired approaches, we looked at Neural Network approa
  
 \section{Methodology}
 
-Our primary objective is to determine an optimal combination of financial assets that offers minimal risk while achieving the maximum return at that level of risk. Our method of doing so will follow Markowitz’s methodology to determine the efficient frontier of investment portfolios of a given set of financial assets. From there, we will also incorporate the Sharpe Ratio (Sharpe, 1966) as an indicator to determine a good risk-return tradeoff.
+Our primary objective was to determine an optimal combination of financial assets that offered minimal risk while achieving the maximum return at that level of risk. Our method of doing so followed Markowitz’s methodology to determine the efficient frontier of investment portfolios of a given set of financial assets. From there, we incorporated the Sharpe Ratio (Sharpe, 1966) as an indicator to determine a good risk-return tradeoff.
 
 \subsection{Assumptions}
 
@@ -134,9 +150,9 @@ That objective is subject to the following constraints.  First, the total return
 E(R_p) = \sum_i w_i E(R_i)
 \end{equation}
  
-For the model presented here, we set that constraint equal to the average return for all ten currencies over the last 365 days. In doing so, we have ensured that the return expected from an optimized portfolio is at least as good as a portfolio selected with equal amounts invested in each currency.
+For the model presented here, we set that constraint equal to the average return for all ten currencies over the last 365 days. In doing so, we ensured that the return expected from an optimized portfolio is at least as good as a portfolio selected with equal amounts invested in each currency.
  
-The next constraint applied ensures that the sum of the decision variables, the cryptocurrency weights, equals 100\%.  That constraint can be represented by the following function
+The next constraint applied ensured that the sum of the decision variables, the cryptocurrency weights, equaled 100\%.  That constraint can be represented by the following function
 
 \begin{equation} 
 \sum_i w_i = 1
@@ -170,23 +186,33 @@ Prior to building an optimization model, simulations of random portfolios were r
  
 \section{Model}
 
-The optimization model was created using the Gurobi Python interface. Following the model formulation, the decision variables were the weights of each cryptocurrency in the portfolio with the constraint that the total of the weights must equal one. An initial optimization was performed using these constraints to give the weights that provided the minimum variance. Following this, an additional constraint to set the target portfolio return was added and a number of models were run by changing the target return from the minimum to maximum returns. This provided an efficient frontier showing the minimum risk at the varying levels of return.
+The optimization models were created using ASPE for Microsoft Excel and the Gurobi Python interface. Following the model formulation, the decision variables were set to equal the weights of each cryptocurrency in the portfolio with the constraint that the total of the weights must equal one. An initial optimization was performed using these constraints to give the weights that provided the minimum variance. Following this, an additional constraint to set the target portfolio return was added and a number of models were run by changing the target return from the minimum to maximum returns. This provided an efficient frontier showing the minimum risk at the varying levels of return.
 
-While the model was optimized through the varying levels of target return, the Sharpe Ratio of each optimized portfolio was calculated and recorded. The Sharpe Ratio provides a way to reasonably estimate a good tradeoff between risk and return, where return is higher than the return given for the minimum risk portfolio. 
+While the model was optimized through the varying levels of target return, the Sharpe Ratio of each optimized portfolio was calculated and recorded. The Sharpe Ratio provided a way to reasonably estimate a good tradeoff between risk and return, where return is higher than the return given for the minimum risk portfolio. 
 
 \section{Results}
 
-\subsection{Cryptocurrency}
+\subsection{Cryptocurrency in ASPE}
+
+The following figure presents the optimization model described in Model Formulation in Microsoft Excel using the ASPE extension.
+
+\includegraphics[width=\textwidth]{aspe1}
+
+ASPE returned a minimum portfolio variance of 0.3\% with a 0.06 standard deviation at the 1.21\% return.  The weights for the portfolio as seen in blue suggest a portfolio that is heaviest in BTC followed by healthy amounts of ETH, LTC, DASH, XRP, and XML.  Using that 0.3\% variance, a Sharpe optimization was also completed in ASPE as follows producing a maximum expected return of 1.1\% with a similar mix of currencies, but heavier on the top end.
+
+\includegraphics[width=\textwidth]{aspe3}
+
+\subsection{Cryptocurrency in Python}
 
 The figure below shows the results of the simulations and Gurobi optimization model. The orange dots are the 10,000 simulated portfolios with randomly assigned weights of the decision variables. The green curve shows the efficient frontier with points for the minimum risk portfolio and the maximum optimized Sharpe Ratio portfolio. The minimum risk portfolio is estimated to provide a daily return of 0.8\% with a volatility (standard deviation) of 0.04. The maximum Sharpe ratio portfolio is estimated to give 1.1\% daily return with volatility of 0.053. The allocations of cryptocurrencies and weights for the two optimized portfolios are shown in the appendix.
 
-\includegraphics[width=\textwidth]{crypt1}
+\includegraphics[width=0.8\textwidth]{crypt1}
 
 \subsection{S\&P 500 Stocks}
 
 To validate the cryptocurrency portfolio optimization model, we chose to use the same model on S\&P 500 companies and compare the optimized minimum risk returns to an S\&P 500 index fund. The python optimization model was run on a random subset of 100 companies with daily data since 2015. The model’s results were compared to the index fund's performance over the same period and found our optimized minimum risk portfolio provided very similar return and slightly lower volatility. The minimum risk portfolio had an estimated annual return of 11.6\% and volatility of 0.10, while the index fund had annual return of 11\% and volatility of 0.13. 
 
-\includegraphics[width=\textwidth]{sp1}
+\includegraphics[width=0.8\textwidth]{sp1}
  
 \section{Discussion and Conclusions}
 
@@ -200,6 +226,52 @@ Lastly, we would be interested in exploring the use of neural networks in our op
 
 In Summary, portfolio optimization can be used to minimize the risk when investing in volatile financial assets like cryptocurrencies. Building on the time-tested foundations developed by Markowitz and Sharpe, modern optimization techniques will create new and interesting methods of minimizing risk while maximizing gains.
 
+\pagebreak
+
+\section*{References}
+
+ \begin{hangparas}{.25in}{1}
+
+
+Copula (probability theory). (2018, February 23). In \emph{Wikipedia}. Retrieved from
+\url{ https://en.wikipedia.org/w/index.php?title=Copula_(probability_theory)&oldid=827164839}
+
+Dr. Thomas Starke, David Edwards, \& Dr. Thomas Wiecki. (2015, March 9). The Efficient Frontier: Markowitz portfolio optimization in Python. Retrieved March 10, 2018, from \url{https://blog.quantopian.com/markowitz-portfolio-optimization-2/}
+
+Freitas, F. D., De Souza, A. F., \& de Almeida, A. R. (2009). Prediction-based portfolio optimization model using neural networks. \emph{Neurocomputing}, 72(10), 2155–2170. \url{https://doi.org/10.1016/j.neucom.2008.08.019}
+
+Garcia, D., \& Schweitzer, F. (2015). Social signals and algorithmic trading of Bitcoin. \emph{Royal Society Open Science}, 2(9). \url{https://doi.org/10.1098/rsos.150288}
+
+Gregory, C., Darby-Dowman, K., \& Mitra, G. (2011). Robust optimization and portfolio selection: The cost of robustness. \emph{European Journal of Operational Research}, 212(2), 417–428. \url{https://doi.org/10.1016/j.ejor.2011.02.015}
+
+Hong, K. (2017). Bitcoin as an alternative investment vehicle. \emph{Information Technology and Management}, 18(4), 265–275. \url{https://doi.org/10.1007/s10799-016-0264-6}
+
+Investment Portfolio Optimization. (n.d.). Retrieved March 10, 2018, from \url{http://www.bradfordlynch.com/blog/2015/12/04/InvestmentPortfolioOptimization.html}
+
+Liu, Q., Dang, C., \& Huang, T. (2013). A One-Layer Recurrent Neural Network for Real-Time Portfolio Optimization With Probability Criterion. \emph{IEEE Transactions on Cybernetics}, 43(1), 14–23. \url{https://doi.org/10.1109/TSMCB.2012.2198812}
+
+Markowitz, H. (1952). Portfolio Selection. \emph{The Journal of Finance}, 7(1), 77–91. \url{https://doi.org/10.2307/2975974}
+
+Peng, Y., Albuquerque, P. H. M., Camboim de Sá, J. M., Padula, A. J. A., \& Montenegro, M. R. (2018). The best of two worlds: Forecasting high frequency volatility for cryptocurrencies and traditional currencies with Support Vector Regression. \emph{Expert Systems with Applications}, 97, 177–192. \url{https://doi.org/10.1016/j.eswa.2017.12.004}
+
+Polak, G. G., Rogers, D. F., \& Sweeney, D. J. (2010). Risk management strategies via minimax portfolio optimization.\emph{ European Journal of Operational Research}, 207(1), 409–419. \url{https://doi.org/10.1016/j.ejor.2010.04.025} 
+
+Sharpe, W. F. (1966). Mutual Fund Performance. \emph{The Journal of Business}, 39(1), 119–138.
+
+Sharpe, W. F. (1971). A Linear Programming Approximation for the General Portfolio Analysis Problem. \emph{Journal of Financial \& Quantitative Analysis}, 6(5), 1263–1275.
+
+Xidonas, P., Mavrotas, G., Hassapis, C., \& Zopounidis, C. (2017). Robust multiobjective portfolio optimization: A minimax regret approach. \emph{European Journal of Operational Research}, 262(1), 299–305. \url{https://doi.org/10.1016/j.ejor.2017.03.041}
+
+Young, M. R. (1998). A Minimax Portfolio Selection Rule with Linear Programming Solution. Management Science, 44(5), 673–683. \url{https://doi.org/10.1287/mnsc.44.5.673}
+
+Zhang, Y., \& Hua, Y. (2004a). Portfolio Optimization for Multi-stage Capital Investment with Neural Networks. In F.-L. Yin, J. Wang, \& C. Guo (Eds.), Advances in Neural Networks - ISNN 2004 (Vol. 3174, pp. 982–987). Berlin, Heidelberg: Springer Berlin Heidelberg. \url{https://doi.org/10.1007/978-3-540-28648-6_156}
+
+Zhang, Y., \& Hua, Y. (2004b). Portfolio Optimization for Multi-stage Capital Investment with Neural Networks. In Advances in Neural Networks - ISNN 2004 (pp. 982–987). Springer, Berlin, Heidelberg. \url{https://doi.org/10.1007/978-3-540-28648-6_156}
+
+Zhao, Y., Stasinakis, C., Sermpinis, G., \& Shi, Y. (2018). Neural network copula portfolio optimization for exchange traded funds. Quantitative Finance, 0(0), 1–15. \url{https://doi.org/10.1080/14697688.2017.1414505}
+
+\end{hangparas}
+
 
 \section*{Appendix}
 
@@ -212,6 +284,11 @@ In Summary, portfolio optimization can be used to minimize the risk when investi
 \includegraphics[width=\textwidth]{aspe3}
 \includegraphics[width=0.4\textwidth]{aspe4}
 
+\subsection*{Python - Cryptocurrencies}
+\includepdf[pages=-,scale=.8,pagecommand={}]{crypto_notebook.pdf}
+
+\subsection*{Python - Stocks}
+\includepdf[pages=-,scale=.8,pagecommand={}]{stocks_notebook.pdf}
 
 
 
